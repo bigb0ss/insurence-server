@@ -3,16 +3,17 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-host = 'sql12.freemysqlhosting.net'
-database = 'sql12346844'
-user = 'sql12346844'
-password = '7TfAdTJn6R'
 
-db_connection = sql.connect(host=host,database=database,user=user,password=password)
-
-
-@app.route('/vehicle')
+@app.route('/vehicle',methods)
 def getVechile():
+
+	host = 'sql12.freemysqlhosting.net'
+	database = 'sql12346844'
+	user = 'sql12346844'
+	password = '7TfAdTJn6R'
+
+	db_connection = sql.connect(host=host,database=database,user=user,password=password)
+
 	db_cursor = db_connection.cursor()
 	db_cursor.execute('SELECT * FROM private_vehicles')
 	table_rows = db_cursor.fetchall()
