@@ -4,7 +4,7 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 
-@app.route('/vehicle',methods)
+@app.route('/vehicle')
 def getVechile():
 
 	host = 'sql12.freemysqlhosting.net'
