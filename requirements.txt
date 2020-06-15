@@ -3,3 +3,4 @@ gunicorn==19.7.1
 numpy
 Jinja2==2.9.6
 mysql-connector-python
+Werkzeug==0.16
