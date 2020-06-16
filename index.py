@@ -3,6 +3,9 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+	return "<h1> API is Online </h1>"
 
 @app.route('/vehicle')
 def getVechile():
