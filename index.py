@@ -34,7 +34,7 @@ def getVechile():
 	result =[]
 	for t in table_rows:
 		row={}
-		row['id']=t[0]
+		row['id']=str(t[0])
 		row['name']=t[1]
 		row['reference']=t[2]
 		row['contact']=t[3]
