@@ -14,9 +14,9 @@ def index():
 
 def init_db():
         host = 'remotemysql.com'
-	database = 'JZrbXapnEH'
-	user = 'JZrbXapnEH'
-	password = 'A8RONVZxmh'
+        database = 'JZrbXapnEH'
+        user = 'JZrbXapnEH'
+        password = 'A8RONVZxmh'
         db_connection = sql.connect(host=host,database=database,user=user,password=password)
         return db_connection
         
