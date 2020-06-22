@@ -11,10 +11,21 @@ logging.basicConfig(level=logging.DEBUG)
 def index():
 	return "<h1> API is Online </h1>"
 
+
+def init_db():
+        host = 'remotemysql.com'
+	database = 'JZrbXapnEH'
+	user = 'JZrbXapnEH'
+	password = 'A8RONVZxmh'
+        db_connection = sql.connect(host=host,database=database,user=user,password=password)
+        return db_connection
+        
+	
+
 @app.route('/vehicle')
 def getVechile():
 
-	
+	db_connection = init_db()
 	app.logger.info("Database Connection Established")
 	db_cursor = db_connection.cursor()
 	db_cursor.execute('SELECT * FROM private_vehicles')
@@ -40,10 +51,4 @@ def getVechile():
 
 
 if __name__ == '__main__':
-	host = 'remotemysql.com'
-	database = 'JZrbXapnEH'
-	user = 'JZrbXapnEH'
-	password = 'A8RONVZxmh'
-
-	db_connection = sql.connect(host=host,database=database,user=user,password=password)
 	app.run()
