@@ -10,16 +10,12 @@ def index():
 @app.route('/vehicle')
 def getVechile():
 
-	host = 'sql12.freemysqlhosting.net'
-	database = 'sql12346844'
-	user = 'sql12346844'
-	password = '7TfAdTJn6R'
-
-	db_connection = sql.connect(host=host,database=database,user=user,password=password)
-
+	
+	app.logger.info("Database Connection Established")
 	db_cursor = db_connection.cursor()
 	db_cursor.execute('SELECT * FROM private_vehicles')
 	table_rows = db_cursor.fetchall()
+	app.logger.info("Results fetched from Database")
 	result =[]
 	for t in table_rows:
 		row={}
@@ -35,9 +31,15 @@ def getVechile():
 		row['date']= t[9]
 
 		result.append(row)
-
+	app.logger.info("Results are processed ")
 	return jsonify(result)
 
 
 if __name__ == '__main__':
+	host = 'remotemysql.com'
+	database = 'JZrbXapnEH'
+	user = 'JZrbXapnEH'
+	password = 'A8RONVZxmh'
+
+	db_connection = sql.connect(host=host,database=database,user=user,password=password)
 	app.run()
