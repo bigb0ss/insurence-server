@@ -1,7 +1,11 @@
 import mysql.connector as sql
 from flask import Flask, jsonify
 
+import logging
+
 app = Flask(__name__)
+
+logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/')
 def index():
