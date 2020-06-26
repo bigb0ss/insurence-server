@@ -157,9 +157,9 @@ def getFireMisc():
                 row['policy_number']=t[4]
                 row['policy_type']=t[5]
                 row['vehicle_type']=t[6]
-                row['mail']=t[6]
-                row['address']=t[7]
-                row['date']= t[8].strftime("%d-%m-%y")
+                row['mail']=t[7]
+                row['address']=t[8]
+                row['date']= t[9].strftime("%d-%m-%y")
                 #if (t[8])>(datetime.now()+timedelta(days=7)).date():
                 result.append(row)
         app.logger.info("Results are processed ")
@@ -185,10 +185,10 @@ def getRenewFireMisc():
                 row['policy_number']=t[4]
                 row['policy_type']=t[5]
                 row['vehicle_type']=t[6]
-                row['mail']=t[6]
-                row['address']=t[7]
-                row['date']= t[8].strftime("%d-%m-%y")
-                if (t[8])<(datetime.now()+timedelta(days=7)).date():
+                row['mail']=t[7]
+                row['address']=t[8]
+                row['date']= t[9].strftime("%d-%m-%y")
+                if (t[9])<(datetime.now()+timedelta(days=7)).date():
                         result.append(row)
         app.logger.info("Results are processed ")
         return jsonify(result)
