@@ -156,7 +156,7 @@ def getFireMisc():
                 row['contact']=t[3]
                 row['policy_number']=t[4]
                 row['policy_type']=t[5]
-                #row['vehicle_type']=t[6]
+                row['vehicle_type']=t[6]
                 row['mail']=t[6]
                 row['address']=t[7]
                 row['date']= t[8].strftime("%d-%m-%y")
@@ -184,7 +184,7 @@ def getRenewFireMisc():
                 row['contact']=t[3]
                 row['policy_number']=t[4]
                 row['policy_type']=t[5]
-                #row['vehicle_type']=t[6]
+                row['vehicle_type']=t[6]
                 row['mail']=t[6]
                 row['address']=t[7]
                 row['date']= t[8].strftime("%d-%m-%y")
@@ -209,9 +209,15 @@ def createRecord():
                 db_cursor.execute(query,args)
                 db_connection.commit()
         elif content['type']=="2":
-                pass
+                query = "INSERT INTO heavy_vehicles(name,reference,contact,policy_number,policy_type,vehicle_type,mail,address,date) values (%s,%s,%s,%s,%s,%s,%s,%s,DATE %s)"
+                args = (content['name'],content['reference'],content['contact'],content['policy_number'],content['policy_type'],content['gtype'],content['mail'],content['address'],content['date'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
         elif content['type'] == "3":
-                pass 
+                query = "INSERT INTO fire_misc(name,reference,contact,policy_number,policy_type,type,mail,address,date) values (%s,%s,%s,%s,%s,%s,%s,%s,DATE %s)"
+                args = (content['name'],content['reference'],content['contact'],content['policy_number'],content['policy_type'],content['gtype'],content['mail'],content['address'],content['date'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
 
         return jsonify({"status":"success"})
 
