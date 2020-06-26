@@ -1,5 +1,5 @@
 import mysql.connector as sql
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 from datetime import timedelta, datetime 
 import logging
 
@@ -200,6 +200,9 @@ def getRenewFireMisc():
 def createRecord():
         content = request.json
         print(content)
+        db_connection = init_db()
+        app.logger.info("Database Connection Established")
+        db_cursor = db_connection.cursor()
         if content['type'] ==1:
                 pass
         elif content['type']==2:
