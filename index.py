@@ -207,7 +207,7 @@ def createRecord():
         elif content['type'] == 3:
                 pass 
 
-        return "sucess"
+        return jsonify({"status":"success"})
 
 if __name__ == '__main__':
 	app.run()
