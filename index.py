@@ -203,11 +203,14 @@ def createRecord():
         db_connection = init_db()
         app.logger.info("Database Connection Established")
         db_cursor = db_connection.cursor()
-        if content['type'] ==1:
+        if content['type'] =="1":
+                query = "INSERT INTO private_vehicles(name,reference,contact,policy_number,policy_type,vehicle_type,mail,address,date) values (%s,%s,%s,%s,%s,%s,%s,%s,DATE %s)"
+                args = (content['name'],content['reference'],content['contact'],content['policy_number'],content['policy_type'],content['gtype'],content['mail'],content['address'],content['date'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+        elif content['type']=="2":
                 pass
-        elif content['type']==2:
-                pass
-        elif content['type'] == 3:
+        elif content['type'] == "3":
                 pass 
 
         return jsonify({"status":"success"})
