@@ -196,5 +196,18 @@ def getRenewFireMisc():
 
 
 
+@app.route('/create',methods=['GET','POST'])
+def createRecord():
+        content = request.json
+        print(content)
+        if content['type'] ==1:
+                pass
+        elif content['type']==2:
+                pass
+        elif content['type'] == 3:
+                pass 
+
+        return "sucess"
+
 if __name__ == '__main__':
 	app.run()
