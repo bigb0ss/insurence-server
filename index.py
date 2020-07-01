@@ -245,5 +245,31 @@ def renewRecord():
                 db_connection.commit()
 
         return jsonify({"status":"success"})
+
+@app.route('/edit',methods=['GET','POST'])
+def editRecord():
+        content = request.json
+        db_connection = init_db()
+        app.logger.info("Database Connection Established")
+        db_cursor = db_connection.cursor()
+        if content['type'] == "1":
+                query= "UPDATE private_vehicles SET name=%s,reference=%s,contact=%s,policy_number=%s,policy_type=%s,vehicle_type=%s,mail=%s,address=%s WHERE id = "+content['id']
+                args = (content['name'],content['reference'],content['contact'],content['policy_number'],content['policy_type'],content['gtype'],content['mail'],content['address'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+        elif content['type'] == "2":
+                query= "UPDATE heavy_vehicles SET name=%s,reference=%s,contact=%s,policy_number=%s,policy_type=%s,vehicle_type=%s,mail=%s,address=%s WHERE id = "+content['id']
+                args = (content['name'],content['reference'],content['contact'],content['policy_number'],content['policy_type'],content['gtype'],content['mail'],content['address'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+        elif content['type'] == "3":
+                query= "UPDATE fire_misc SET name=%s,reference=%s,contact=%s,policy_number=%s,policy_type=%s,type=%s,mail=%s,address=%s WHERE id = "+content['id']
+                args = (content['name'],content['reference'],content['contact'],content['policy_number'],content['policy_type'],content['gtype'],content['mail'],content['address'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+
+        return jsonify({"status":"success"})
+
+
 if __name__ == '__main__':
 	app.run()
