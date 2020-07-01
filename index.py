@@ -221,5 +221,29 @@ def createRecord():
 
         return jsonify({"status":"success"})
 
+
+@app.route('/renew',methods=['GET','POST'])
+def renewRecord():
+        content = request.json
+        db_connection = init_db()
+        app.logger("Database Connection Established")
+        db_cursor = db_connection.cursor()
+        if content['type'] == "1":
+                query ="INSERT INTO private_vehicles(policy_number,policy_type,date) values (%s,%s,%s) where id = "+content['id']
+                args = (content['policy_number'],content['policy_type'],content['date'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+        elif content['type'] == "2":
+                query ="INSERT INTO heavy_vehicles(policy_number,policy_type,date) values (%s,%s,%s) where id = "+content['id']
+                args = (content['policy_number'],content['policy_type'],content['date'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+        elif content['type'] == "3":
+                query ="INSERT INTO fire_misc(policy_number,policy_type,date) values (%s,%s,%s) where id = "+content['id']
+                args = (content['policy_number'],content['policy_type'],content['date'])
+                db_cursor.execute(query,args)
+                db_connection.commit()
+
+        return jsonify({"status":"success"})
 if __name__ == '__main__':
 	app.run()
