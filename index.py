@@ -226,7 +226,7 @@ def createRecord():
 def renewRecord():
         content = request.json
         db_connection = init_db()
-        app.logger("Database Connection Established")
+        app.logger.info("Database Connection Established")
         db_cursor = db_connection.cursor()
         if content['type'] == "1":
                 query ="UPDATE private_vehicles SET policy_number=%s,policy_type=%s,date=Date %s WHERE id = "+content['id']
