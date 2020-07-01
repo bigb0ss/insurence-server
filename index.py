@@ -229,17 +229,17 @@ def renewRecord():
         app.logger("Database Connection Established")
         db_cursor = db_connection.cursor()
         if content['type'] == "1":
-                query ="INSERT INTO private_vehicles(policy_number,policy_type,date) values (%s,%s,%s) where id = "+content['id']
+                query ="UPDATE private_vehicles SET policy_number=%s,policy_type=%s,date=Date %s WHERE id = "+content['id']
                 args = (content['policy_number'],content['policy_type'],content['date'])
                 db_cursor.execute(query,args)
                 db_connection.commit()
         elif content['type'] == "2":
-                query ="INSERT INTO heavy_vehicles(policy_number,policy_type,date) values (%s,%s,%s) where id = "+content['id']
+                query ="UPDATE heavy_vehicles SET policy_number=%s,policy_type=%s,date=Date %s WHERE id = "+content['id']
                 args = (content['policy_number'],content['policy_type'],content['date'])
                 db_cursor.execute(query,args)
                 db_connection.commit()
         elif content['type'] == "3":
-                query ="INSERT INTO fire_misc(policy_number,policy_type,date) values (%s,%s,%s) where id = "+content['id']
+                query ="UPDATE fire_misc SET policy_number=%s,policy_type=%s,date=Date %s WHERE id = "+content['id']
                 args = (content['policy_number'],content['policy_type'],content['date'])
                 db_cursor.execute(query,args)
                 db_connection.commit()
