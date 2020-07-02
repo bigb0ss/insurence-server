@@ -271,5 +271,101 @@ def editRecord():
         return jsonify({"status":"success"})
 
 
+
+@app.route('/search',methods=['GET','POST'])
+def searchRecord():
+        content = request.json
+        db_connection = init_db()
+        app.logger.info("Database Connection Established")
+        db_cursor = db_connection.cursor()
+        if content['type'] == "1":
+                if content['search'] == "1":
+                        query = "SELECT * FROM private_vehicles WHERE name=%s and policy_number=%s"
+                        args = (content['name'],content['policy_number'])
+                elif content['search'] == "2":
+                        query = "SELECT * FROM private_vehicles WHERE name=%s and (date<=%s and date >=%s)"
+                        args = (content['name'],content['date'],content['date'])
+                elif content['search'] == "3":
+                        query = "SELECT * FROM private_vehicles WHERE name=%s or name=%s"
+                        args = (content['name'],content['name'])
+                elif content['search'] == "4":
+                        query = "SELECT * FROM private_vehicles WHERE policy_number=%s or policy_number=%s"
+                        args = (content['policy_number'],content['policy_number'])
+                elif content['search'] == "5":
+                        query = "SELECT * FROM private_vehicles WHERE contact = %s or contact = %s"
+                        args = (content['contact'],content['contact'])
+                elif content['search'] == "6":
+                        query = "SELECT * FROM private_vehicles WHERE date<=%s and date>=%s"
+                        args = (content['date'],content['date'])
+
+                db_cursor.execute(query,args)
+                table_rows = db_cursor.fetchall()                 
+
+        elif content['type'] == "2":
+                if content['search'] == "1":
+                        query = "SELECT * FROM heavy_vehicles WHERE name=%s and policy_number=%s"
+                        args = (content['name'],content['policy_number'])
+                elif content['search'] == "2":
+                        query = "SELECT * FROM heavy_vehicles WHERE name=%s and (date<=%s and date >=%s)"
+                        args = (content['name'],content['date'],content['date'])
+                elif content['search'] == "3":
+                        query = "SELECT * FROM heavy_vehicles WHERE name=%s or name=%s"
+                        args = (content['name'],content['name'])
+                elif content['search'] == "4":
+                        query = "SELECT * FROM heavy_vehicles WHERE policy_number=%s or policy_number=%s"
+                        args = (content['policy_number'],content['policy_number'])
+                elif content['search'] == "5":
+                        query = "SELECT * FROM heavy_vehicles WHERE contact = %s or contact=%s"
+                        args = (content['contact'],content['contact'])
+                elif content['search'] == "6":
+                        query = "SELECT * FROM heavy_vehicles WHERE date<=%s and date>=%s"
+                        args = (content['date'],content['date'])
+
+                db_cursor.execute(query,args)
+                table_rows = db_cursor.fetchall()
+
+        elif content['type'] == "3":
+                if content['search'] == "1":
+                        query = "SELECT * FROM fire_misc WHERE name=%s and policy_number=%s"
+                        args = (content['name'],content['policy_number'])
+                elif content['search'] == "2":
+                        query = "SELECT * FROM fire_misc WHERE name=%s and (date<=%s and date >=%s)"
+                        args = (content['name'],content['date'],content['date'])
+                elif content['search'] == "3":
+                        query = "SELECT * FROM fire_misc WHERE name=%s or name=%s"
+                        args = (content['name'],content['name'])
+                elif content['search'] == "4":
+                        query = "SELECT * FROM fire_misc WHERE policy_number=%s or policy_number=%s"
+                        args = (content['policy_number'],content['name'])
+                elif content['search'] == "5":
+                        query = "SELECT * FROM fire_misc WHERE contact = %s or contact=%s"
+                        args = (content['contact'],content['contact'])
+                elif content['search'] == "6":
+                        query = "SELECT * FROM fire_misc WHERE date<=%s and date>=%s"
+                        args = (content['date'],content['date'])
+
+                db_cursor.execute(query,args)
+                table_rows = db_cursor.fetchall()
+
+
+        result=[]
+        for t in table_rows:
+                row={}
+                row['id']=str(t[0])
+                row['name']=t[1]
+                row['reference']=t[2]
+                row['contact']=t[3]
+                row['policy_number']=t[4]
+                row['policy_type']=t[5]
+                row['vehicle_type']=t[6]
+                row['mail']=t[7]
+                row['address']=t[8]
+                row['date']= t[9].strftime("%d-%m-%y")
+                #if (t[9])<(datetime.now()+timedelta(days=7)).date():
+                result.append(row)
+        app.logger.info("Results are processed ")
+        return jsonify(result)
+
+
 if __name__ == '__main__':
 	app.run()
