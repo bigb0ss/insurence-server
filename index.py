@@ -280,16 +280,21 @@ def searchRecord():
         db_cursor = db_connection.cursor()
         if content['type'] == "1":
                 if content['search'] == "1":
-                        query = "SELECT * FROM private_vehicles WHERE name=%s and policy_number=%s"
+                        query = "SELECT * FROM private_vehicles WHERE name like %s and policy_number like %s"
+                        content['name'] = "%" + content['name'] + "%"
+                        content['policy_number'] = "%" + content['policy_number'] + "%"
                         args = (content['name'],content['policy_number'])
                 elif content['search'] == "2":
-                        query = "SELECT * FROM private_vehicles WHERE name=%s and (date<=%s and date >=%s)"
+                        query = "SELECT * FROM private_vehicles WHERE name like %s and (date<=%s and date >=%s)"
+                        content['name'] = "%"+content['name'] + "%"
                         args = (content['name'],content['date'],content['date'])
                 elif content['search'] == "3":
-                        query = "SELECT * FROM private_vehicles WHERE name=%s or name=%s"
+                        query = "SELECT * FROM private_vehicles WHERE name like %s or name like %s"
+                        content['name'] = "%" + content['name'] + "%"
                         args = (content['name'],content['name'])
                 elif content['search'] == "4":
-                        query = "SELECT * FROM private_vehicles WHERE policy_number=%s or policy_number=%s"
+                        query = "SELECT * FROM private_vehicles WHERE policy_number like %s or policy_number like %s"
+                        content['policy_number'] = "%" + content['policy_number'] + "%"
                         args = (content['policy_number'],content['policy_number'])
                 elif content['search'] == "5":
                         query = "SELECT * FROM private_vehicles WHERE contact = %s or contact = %s"
@@ -303,16 +308,21 @@ def searchRecord():
 
         elif content['type'] == "2":
                 if content['search'] == "1":
-                        query = "SELECT * FROM heavy_vehicles WHERE name=%s and policy_number=%s"
+                        query = "SELECT * FROM heavy_vehicles WHERE name like %s and policy_number like %s"
+                        content['name'] = "%" + content['name'] + "%"
+                        content['policy_number'] = "%" + content['policy_number'] + "%"
                         args = (content['name'],content['policy_number'])
                 elif content['search'] == "2":
-                        query = "SELECT * FROM heavy_vehicles WHERE name=%s and (date<=%s and date >=%s)"
+                        query = "SELECT * FROM heavy_vehicles WHERE name like %s and (date<=%s and date >=%s)"
+                        content['name'] = "%"+content['name'] + "%"
                         args = (content['name'],content['date'],content['date'])
                 elif content['search'] == "3":
-                        query = "SELECT * FROM heavy_vehicles WHERE name=%s or name=%s"
+                        query = "SELECT * FROM heavy_vehicles WHERE name like %s or name like %s"
+                        content['name'] = "%" + content['name'] + "%"
                         args = (content['name'],content['name'])
                 elif content['search'] == "4":
-                        query = "SELECT * FROM heavy_vehicles WHERE policy_number=%s or policy_number=%s"
+                        query = "SELECT * FROM heavy_vehicles WHERE policy_number like %s or policy_number like %s"
+                        content['policy_number'] = "%" + content['policy_number'] + "%"
                         args = (content['policy_number'],content['policy_number'])
                 elif content['search'] == "5":
                         query = "SELECT * FROM heavy_vehicles WHERE contact = %s or contact=%s"
@@ -326,16 +336,21 @@ def searchRecord():
 
         elif content['type'] == "3":
                 if content['search'] == "1":
-                        query = "SELECT * FROM fire_misc WHERE name=%s and policy_number=%s"
+                        query = "SELECT * FROM fire_misc WHERE name like %s and policy_number like %s"
+                        content['name'] = "%" + content['name'] + "%"
+                        content['policy_number'] = "%" + content['policy_number'] + "%"
                         args = (content['name'],content['policy_number'])
                 elif content['search'] == "2":
-                        query = "SELECT * FROM fire_misc WHERE name=%s and (date<=%s and date >=%s)"
+                        query = "SELECT * FROM fire_misc WHERE name like %s and (date<=%s and date >=%s)"
+                        content['name'] = "%"+content['name'] + "%"
                         args = (content['name'],content['date'],content['date'])
                 elif content['search'] == "3":
-                        query = "SELECT * FROM fire_misc WHERE name=%s or name=%s"
+                        query = "SELECT * FROM fire_misc WHERE name like %s or name like %s"
+                        content['name'] = "%" + content['name'] + "%"
                         args = (content['name'],content['name'])
                 elif content['search'] == "4":
-                        query = "SELECT * FROM fire_misc WHERE policy_number=%s or policy_number=%s"
+                        query = "SELECT * FROM fire_misc WHERE policy_number like %s or policy_number like %s"
+                        content['policy_number'] = "%" + content['policy_number'] + "%"
                         args = (content['policy_number'],content['name'])
                 elif content['search'] == "5":
                         query = "SELECT * FROM fire_misc WHERE contact = %s or contact=%s"
