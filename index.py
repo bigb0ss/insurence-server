@@ -2,9 +2,9 @@ import mysql.connector as sql
 from flask import Flask, jsonify,request
 from datetime import timedelta, datetime 
 import logging
-
+from flask_cors import CORS
 app = Flask(__name__)
-
+CORS(app)
 logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/')
