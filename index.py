@@ -3,13 +3,11 @@ from flask import Flask, jsonify,request
 from datetime import timedelta, datetime 
 import logging
 from flask_cors import CORS
+
+
 app = Flask(__name__)
 CORS(app)
 logging.basicConfig(level=logging.DEBUG)
-
-@app.route('/')
-def index():
-	return "<h1> API is Online </h1>"
 
 
 def init_db():
@@ -20,7 +18,26 @@ def init_db():
         db_connection = sql.connect(host=host,database=database,user=user,password=password)
         return db_connection
         
+
+
+
+@app.route('/')
+def index():
+
+        return "<h1> API is Online </h1>"
 	
+
+@app.route('/dummy')
+def dummy():
+        db_connection = init_db()
+        app.logger.info("Database Connection Established")
+        db_cursor = db_connection.cursor()
+        db_cursor.execute("INSERT into dummy(dummy) values (\'dummy\')")
+        db_connection.commit()
+        db_cursor.execute("Truncate Table dummy")
+        db_connection.commit()       
+
+        return jsonify({"status":"success"})
 
 @app.route('/vehicle')
 def getVechile():
