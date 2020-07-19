@@ -398,6 +398,23 @@ def searchRecord():
         app.logger.info("Results are processed ")
         return jsonify(result)
 
+@app.route('/delete',methods=['GET','POST'])
+def delete():
+        content = request.json
+        db_connection = init_db()
+        app.logger.info("Database Connection Established")
+        db_cursor = db_connection.cursor()
+        if content['type'] == "1":
+                query = "DELETE from private_vehicles where id="+content['id']
+        elif content['type'] == "2":
+                query= "DELETE from heavy_vehicles where id="+content['id']
+        elif content['type'] == "3":
+                query= "DELETE from fire_misc where id="+content['id']
+
+
+        db_cursor.execute(query)
+        db_connection.commit()
+        return jsonify({"status":"success"})
 
 if __name__ == '__main__':
 	app.run()
