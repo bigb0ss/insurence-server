@@ -416,5 +416,11 @@ def delete():
         db_connection.commit()
         return jsonify({"status":"success"})
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+        content = request.json
+        if content['password'].lower() == "msdo":
+                return jsonify({"status":"success"})
+                
 if __name__ == '__main__':
 	app.run()
