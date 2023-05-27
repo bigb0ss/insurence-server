@@ -3,5 +3,5 @@ gunicorn==19.7.1
 numpy
 Jinja2
 mysql-connector-python
-Werkzeug==0.16
+Werkzeug==2.2.3
 flask_cors
